@@ -1,0 +1,35 @@
+version: '3.0'
+
+services:
+  db:
+    container_name: db_flask_sample
+    image: postgres:11.1
+    hostname: postgresql
+    volumes:
+      - ./postgres-data/postgres:/var/lib/postgresql/data
+    env_file:
+      - database.conf
+    ports:
+      - "5432:5432"
+
+
+  web:
+    container_name: web_flask_sample
+    build: .
+    command: >
+      /bin/bash -c "pip3 install --upgrade pip &&
+      pip install --upgrade setuptools &&
+      python3 manage.py run --host=0.0.0.0 --port=9000"
+    volumes:
+      - .:/code
+    environment:
+      - DATABASE_USER=postgres
+      - DB_PASSWORD=postgres
+      - LC_ALL=de_DE.utf-8
+      - LANG=de_DE.utf-8
+      - OAUTHLIB_INSECURE_TRANSPORT=1
+
+    ports:
+      - "9000:9000"
+    depends_on:
+      - db
