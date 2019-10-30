@@ -1,10 +1,10 @@
-Flask==0.12.2
+Flask==1.0
 Flask-SQLAlchemy==2.3.2
 Flask-WTF==0.14.2
 flask-jwt-extended
 flask-restful
 flask-restful-swagger
-Flask==0.12.2
+Flask==1.0
 Flask-Bcrypt==0.7.1
 Flask-Injector==0.10.1
 Flask-Login==0.4.1
